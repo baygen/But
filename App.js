@@ -6,7 +6,8 @@ import {
   View,
   AppState,
   DeviceEventEmitter,
-  Button
+  Button,
+  Vibration
 } from 'react-native';
 import KeyEvent from 'react-native-keyevent';
 
@@ -24,6 +25,25 @@ var whoosh = new Sound('frog.wav', Sound.MAIN_BUNDLE, (error) => {
   console.log('SOUND duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
 });
 
+
+function playSoundTrack (callback) {
+  console.log("App sound.");
+  let defaultCallback = (success) => {
+    if (success) {
+      Vibration.vibrate(2000);
+      callback && callback();
+      console.log('successfully finished playing');
+    } else {
+      console.log('playback failed due to audio decoding errors');
+      // reset the player to its uninitialized state (android only)
+      // this is the only option to recover after an error occured and use the player again
+      whoosh.reset();
+    }
+  }
+  whoosh.play( defaultCallback );
+}
+
+export const play = (callback) => playSoundTrack(callback);
 
 let TEXT = "";
 
@@ -93,19 +113,7 @@ export default class App extends Component<Props> {
     this.setState({ appStatus: nextAppState, changes: ++this.state.changes, text: TEXT })
   };
 
-  playSound = () => {
-    console.log("App sound.");
-    whoosh.play((success) => {
-      if (success) {
-        console.log('successfully finished playing');
-      } else {
-        console.log('playback failed due to audio decoding errors');
-        // reset the player to its uninitialized state (android only)
-        // this is the only option to recover after an error occured and use the player again
-        whoosh.reset();
-      }
-    });
-  }
+  playSound = () => playSoundTrack()
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);

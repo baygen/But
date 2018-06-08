@@ -55582,7 +55582,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.setText = undefined;
+  exports.setText = exports.play = undefined;
   var _jsxFileName = "/home/dev/Documents/React-Native/SafeAmigosDemo/buttons/App.js";
 
   var _react = _require(_dependencyMap[0], "react");
@@ -55609,6 +55609,29 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
     console.log('SOUND duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
   });
+
+  function playSoundTrack(callback) {
+    console.log("App sound.");
+
+    var defaultCallback = function defaultCallback(success) {
+      if (success) {
+        _reactNative.Vibration.vibrate(2000);
+
+        callback && callback();
+        console.log('successfully finished playing');
+      } else {
+        console.log('playback failed due to audio decoding errors');
+        whoosh.reset();
+      }
+    };
+
+    whoosh.play(defaultCallback);
+  }
+
+  var play = exports.play = function play(callback) {
+    return playSoundTrack(callback);
+  };
+
   var TEXT = "";
 
   var setText = exports.setText = function setText(text) {
@@ -55643,15 +55666,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       };
 
       _this.playSound = function () {
-        console.log("App sound.");
-        whoosh.play(function (success) {
-          if (success) {
-            console.log('successfully finished playing');
-          } else {
-            console.log('playback failed due to audio decoding errors');
-            whoosh.reset();
-          }
-        });
+        return playSoundTrack();
       };
 
       _this.state = {
@@ -55732,7 +55747,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             style: styles.container,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 125
+              lineNumber: 133
             }
           },
           _react2.default.createElement(
@@ -55741,7 +55756,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.welcome,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 126
+                lineNumber: 134
               }
             },
             "Last pressed button: ",
@@ -55753,7 +55768,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.welcome,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 129
+                lineNumber: 137
               }
             },
             "Pressed volume in background:"
@@ -55764,7 +55779,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.welcome,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 132
+                lineNumber: 140
               }
             },
             this.state.text
@@ -55774,7 +55789,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             onPress: this.playSound,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 136
+              lineNumber: 144
             }
           }),
           _react2.default.createElement(_reactNative.View, {
@@ -55788,7 +55803,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 138
+              lineNumber: 146
             }
           }),
           _react2.default.createElement(
@@ -55799,7 +55814,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               }],
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 141
+                lineNumber: 149
               }
             },
             " ",
@@ -55813,7 +55828,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.welcome,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 142
+                lineNumber: 150
               }
             },
             message
@@ -55824,7 +55839,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.instructions,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 145
+                lineNumber: 153
               }
             },
             "Pressed ",
@@ -55835,7 +55850,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             style: styles.instructions,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 149
+              lineNumber: 157
             }
           })
         );
@@ -56245,6 +56260,8 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   var _App = _require(_dependencyMap[0], "./App");
 
+  var playing = false;
+
   module.exports = function _callee(taskData) {
     return regeneratorRuntime.async(function _callee$(_context) {
       while (1) {
@@ -56252,9 +56269,18 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           case 0:
             console.log("Background Task success");
             console.log(taskData);
+
+            if (!playing) {
+              playing = true;
+              (0, _App.play)(function () {
+                console.log('Playing finished');
+                playing = false;
+              });
+            }
+
             (0, _App.setText)("Hello world!");
 
-          case 3:
+          case 4:
           case "end":
             return _context.stop();
         }
