@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 //import android.content.;
 import com.facebook.react.ReactApplication;
 import com.zmxv.RNSound.RNSoundPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.github.kevinejohn.keyevent.KeyEventPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -29,7 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
+            new RNCameraPackage(),
+            new MainReactPackage(),
             new RNSoundPackage(),
             new KeyEventPackage()
       );
