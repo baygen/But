@@ -4,9 +4,9 @@ import BackTask from './BackTask';
 
 if (Platform.OS === 'android') {
   // Register Android specific task here
-  AppRegistry.registerHeadlessTask("task", ()=>BackTask)
+  AppRegistry.registerHeadlessTask("task", () => BackTask);
 } else if (Platform.OS === 'ios') {
-// Register IOS specific task here
+  // Register IOS specific task here
 }
 
 AppRegistry.registerComponent('buttons', () => App);
