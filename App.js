@@ -7,43 +7,24 @@ import {
   AppState,
   DeviceEventEmitter,
   Button,
-  Vibration
+  Vibration,
+ConnectionInfo,
+CameraRoll,
+FlexAlignType,
+MapView,
+OpenCameraDialogOptions,
+Permission,
+PresentLocalNotificationDetails,
+PushNotification,
+SimpleTask,
+Task,
 } from 'react-native';
 import KeyEvent from 'react-native-keyevent';
 
-import Sound from "react-native-sound";
-Sound.setCategory('Playback');
-
-// Load the sound file 'whoosh.mp3' from the app bundle
-// See notes below about preloading sounds within initialization code below.
-var whoosh = new Sound('frog.wav', Sound.MAIN_BUNDLE, (error) => {
-  if (error) {
-    console.log('SOUND failed to load the sound', error);
-    return;
-  }
-  // loaded successfully
-  console.log('SOUND duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
-});
-
-
-function playSoundTrack (callback) {
-  console.log("App sound.");
-  let defaultCallback = (success) => {
-    if (success) {
-      Vibration.vibrate(2000);
-      callback && callback();
-      console.log('successfully finished playing');
-    } else {
-      console.log('playback failed due to audio decoding errors');
-      // reset the player to its uninitialized state (android only)
-      // this is the only option to recover after an error occured and use the player again
-      whoosh.reset();
-    }
-  }
-  whoosh.play( defaultCallback );
-}
-
-export const play = (callback) => playSoundTrack(callback);
+// FlexAlignType
+// PerformanceEntry.///
+import { playAlertTrack, releaseSounds } from "./src/modules/Sounds";
+// import { QRScanner } from './src/screens/QRScanner/container';
 
 let TEXT = "";
 
@@ -103,22 +84,16 @@ export default class App extends Component<Props> {
 
   };
 
-  logSoundData = () => {
-    console.log('SOUND volume: ' + whoosh.getVolume());
-    console.log('SOUND pan: ' + whoosh.getPan());
-    console.log('SOUND loops: ' + whoosh.getNumberOfLoops());
-  }
-
   _handleAppStateChange = (nextAppState) => {
     this.setState({ appStatus: nextAppState, changes: ++this.state.changes, text: TEXT })
   };
 
-  playSound = () => playSoundTrack()
+  playSound = () => playAlertTrack().then(() => Vibration.vibrate(500))
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
     KeyEvent.removeKeyDownListener();
-    whoosh.release();
+    releaseSounds();
     // if you are listening to keyUp
     KeyEvent.removeKeyUpListener();
 
@@ -128,7 +103,7 @@ export default class App extends Component<Props> {
 
   render() {
     const message = this.state.pressed ? this.state.message : "Here will appear message after one of sound buttons will be long pressed";
-
+    // return <QRScanner/>
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -141,7 +116,7 @@ export default class App extends Component<Props> {
           {this.state.text}
         </Text>
 
-        <Button title="Tap to play sound" onPress={this.playSound}/>
+        <Button title="Tap to play sound" onPress={this.playSound} />
 
         <View style={{ height: 60, marginTop: '30%', width: '100%', backgroundColor: 'green', justifyContent: 'flex-end', alignItems: 'center' }}>
 

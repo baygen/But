@@ -1,4 +1,5 @@
-import {setText, play} from "./App";
+import {setText} from "./App";
+import { playAlertTrack } from "./src/modules/Sounds";
 
 let playing = false;
 
