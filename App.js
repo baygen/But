@@ -1,3 +1,4 @@
+'use sctrict'
 import React, { Component, AppRegistry } from 'react';
 import {
   Platform,
@@ -8,25 +9,30 @@ import {
   DeviceEventEmitter,
   Button,
   Vibration,
-ConnectionInfo,
-CameraRoll,
-FlexAlignType,
-MapView,
-OpenCameraDialogOptions,
-Permission,
-PresentLocalNotificationDetails,
-PushNotification,
-SimpleTask,
-Task,
+  ConnectionInfo,
+  CameraRoll,
+  FlexAlignType,
+  MapView,
+  OpenCameraDialogOptions,
+  Permission,
+  PermissionsAndroid,
+  PermissionStatus,
+  PresentLocalNotificationDetails,
+  PushNotification,
+  SimpleTask,
+  Task
 } from 'react-native';
+import { getCurrentDeviceInfo, DeviceInfoManager, CurrentDeviceInfo } from './src/modules/DeviceInfo';
 import KeyEvent from 'react-native-keyevent';
 
 // FlexAlignType
 // PerformanceEntry.///
 import { playAlertTrack, releaseSounds } from "./src/modules/Sounds";
-// import { QRScanner } from './src/screens/QRScanner/container';
+import { QRScanner } from './src/screens/QRScanner/container';
+import Permissions from 'react-native-permissions';
 
 let TEXT = "";
+console.keys = (obj) => console.log(Object.keys(obj));
 
 export const setText = (text) => {
   TEXT = text;
@@ -55,8 +61,21 @@ export default class App extends Component<Props> {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log("Component Will Mount")
+    console.log("Object RESULTS")
+    console.log(CurrentDeviceInfo.MaxMemory)
+    // console.keys(DeviceInfoManager)
+    // getCurrentDeviceInfo().then(console.log)
+  }
 
+  componentDidMount() {
+    console.log("POSITION Component did Mount")
+    // this.initGPS();
+    this.initButtonsListeners();
+  };
+
+  initButtonsListeners = () => {
     AppState.addEventListener('change', this._handleAppStateChange);
     KeyEvent.onKeyDownListener((keyEvent) => {
 
@@ -80,15 +99,41 @@ export default class App extends Component<Props> {
         keyCode, action, way: 'up'
       })
     });
+  }
 
+  initGPS = async () => {
+    console.log(navigator.geolocation)
+    // await navigator.geolocation.requestAuthorization()
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS, {
+      'title': this.props.permissionDialogTitle,
+      'message': this.props.permissionDialogMessage,
+    })
+      .then((granted) => {
+        const isAuthorized = Platform.Version >= 23 ?
+          granted === PermissionsAndroid.RESULTS.GRANTED :
+          granted === true;
 
-  };
+        this.setState({ isAuthorized, isAuthorizationChecked: true })
+      })
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const initialPosition = JSON.stringify(position);
+        console.log("POSITION:" + initialPosition)
+        this.setState({ initialPosition });
+      },
+      (error) => console.log("POSITION:" + JSON.stringify(error)),
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 10000 }
+    );
+  }
 
   _handleAppStateChange = (nextAppState) => {
     this.setState({ appStatus: nextAppState, changes: ++this.state.changes, text: TEXT })
   };
 
-  playSound = () => playAlertTrack().then(() => Vibration.vibrate(500))
+  playSound = () => {
+    // playAlertTrack().then(() => Vibration.vibrate(500))
+    DeviceInfoManager.getCurrentInternetConnection().then(console.log);
+  }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange);
@@ -101,9 +146,15 @@ export default class App extends Component<Props> {
     KeyEvent.removeKeyMultipleListener();
   };
 
+  componentDidCatch(err, errInfo) {
+    console.error(err)
+    console.info(errInfo)
+  }
+
   render() {
     const message = this.state.pressed ? this.state.message : "Here will appear message after one of sound buttons will be long pressed";
-    // return <QRScanner/>
+    // return (<MapView style={{flex:1}} showsUserLocation={false} backgroundColor="green"/>)
+    // return(<QRScanner/>)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -113,7 +164,7 @@ export default class App extends Component<Props> {
           Pressed volume in background:
         </Text>
         <Text style={styles.welcome}>
-          {this.state.text}
+          {/* {JSON.stringify(this.state.initialPosition)} */}
         </Text>
 
         <Button title="Tap to play sound" onPress={this.playSound} />
