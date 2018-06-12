@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 //import android.media.session.AudioManager;
 //import android.content.;
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.zmxv.RNSound.RNSoundPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.github.kevinejohn.keyevent.KeyEventPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
             new RNCameraPackage(),
             new MainReactPackage(),
+            new RNDeviceInfo(),
             new RNSoundPackage(),
             new KeyEventPackage()
       );

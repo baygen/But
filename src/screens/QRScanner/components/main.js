@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
   AppRegistry,
@@ -12,7 +12,7 @@ import {
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-export default class ScanScreen extends Component {
+export default class ScanScreen extends PureComponent {
   onSuccess(e) {
     console.log('QR result')
     console.info(e)
@@ -21,10 +21,16 @@ export default class ScanScreen extends Component {
     //   .catch(err => console.error('An error occured', err));
   }
 
+  solo = () => {
+    // QRCodeScanner.
+  }
+
   render() {
     return (
       <QRCodeScanner
-        onRead={this.onSuccess.bind(this)}
+        // onRead={this .onSuccess.bind(this)}
+        reactivate={true}
+        reactivateTimeout={2000}
         topContent={
           <Text style={styles.centerText}>
             Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
