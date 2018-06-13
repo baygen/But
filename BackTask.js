@@ -1,4 +1,4 @@
-import {setText} from "./App";
+import { setText } from "./App";
 import { playAlertTrack } from "./src/modules/Sounds";
 
 let playing = false;
@@ -6,9 +6,9 @@ let playing = false;
 module.exports = async taskData => {
   console.log("Background Task success")
   console.log(taskData);
-  if (!playing){
+  if (!playing) {
     playing = true;
-    play(()=>{
+    playAlertTrack().then(() => {
       console.log('Playing finished')
       playing = false
     })
