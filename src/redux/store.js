@@ -2,12 +2,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 // import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducers from './reducers';
+import reducers from '../redux/reducers';
+import { navigationMiddleware } from '../navigator'
 
 const crashReporter = store => next => action => {
   try {
-    return next(action)
-
+    return next(action);
   } catch (err) {
     console.error('Caught an exception! for ', action.type,'\n')
     return next(action);
@@ -16,7 +16,8 @@ const crashReporter = store => next => action => {
 }
 
 const middlewares = [
-	crashReporter,
+  crashReporter,
+  navigationMiddleware,
   promiseMiddleware(),
   thunk
 ];
@@ -25,6 +26,8 @@ const middlewares = [
 //   // middlewares.push(createLogger({diff: true}));
 // }
 
-export default createStore(reducers, {},
+export default createStore(
+  reducers,
+  {},
   compose(applyMiddleware(...middlewares))
 );

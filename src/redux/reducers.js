@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux';
 
-import navigationReducer from '../navigator/reducer';
-import homeReducer from '../views/home/redux/reducer';
+import { navigationReducer } from '../navigator';
+import termsAndCondition from '../screens/TermsAndConditions/redux/reducer';
+import dataProtection from '../screens/DataProtection/redux/reducer';
+import app from './AppData/reducer';
 
 export default combineReducers({
 	navigation: navigationReducer,
-  home: homeReducer
+  termsAndCondition,
+  dataProtection,
+  app
 });
