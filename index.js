@@ -1,5 +1,6 @@
 import { AppRegistry, Platform } from 'react-native';
-import App from './App';
+// import App from './App';
+import Root from './src/Root'
 import BackTask from './BackTask';
 
 if (Platform.OS === 'android') {
@@ -9,4 +10,5 @@ if (Platform.OS === 'android') {
   // Register IOS specific task here
 }
 
-AppRegistry.registerComponent('buttons', () => App);
+// AppRegistry.registerComponent('buttons', () => App);
+AppRegistry.registerComponent('buttons', () => Root);

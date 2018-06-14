@@ -1,18 +1,16 @@
 'use strict';
-
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import LanguageManager from '../../../Languages';
 
 import {
-  AppRegistry,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  Linking,
+  TouchableOpacity
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-export default class ScanScreen extends PureComponent {
+export default class ScanScreen extends Component {
   onSuccess(e) {
     console.log('QR result')
     console.info(e)
@@ -22,6 +20,8 @@ export default class ScanScreen extends PureComponent {
   }
 
   solo = () => {
+    LanguageManager.setCurrentLanguage('de');
+    this.forceUpdate();
     // QRCodeScanner.
   }
 
@@ -33,11 +33,17 @@ export default class ScanScreen extends PureComponent {
         reactivateTimeout={2000}
         topContent={
           <Text style={styles.centerText}>
-            Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
+            {LanguageManager.word.appName} <Text style={styles.textBold}>
+            wikipedia.org/wiki/QR_code</Text>
+            {LanguageManager.word.name}
           </Text>
         }
         bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable}>
+          <TouchableOpacity style={styles.buttonTouchable} onPress={this.solo}
+          //()=>{
+            //LanguageManager.setCurrentLanguage("ua")
+            //  }}
+            >
             <Text style={styles.buttonText}>OK. Got it!</Text>
           </TouchableOpacity>
         }
