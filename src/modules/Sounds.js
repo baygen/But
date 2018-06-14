@@ -12,7 +12,7 @@ const alert = new Sound('frog.wav', Sound.MAIN_BUNDLE, (error) => {
   console.log('SOUND duration in seconds: ' + alert.getDuration() + 'number of channels: ' + alert.getNumberOfChannels());
 });
 
-export const play = (callback) => playSoundTrack(callback);
+// export const play = (callback) => playAlertTrack().then(callback);
 
 export const playAlertTrack = () => new Promise((res, rej) => {
   alert.play(success => {
