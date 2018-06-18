@@ -1,4 +1,4 @@
-import Sound from "react-native-sound";
+import Sound from 'react-native-sound';
 
 Sound.setCategory('Playback');
 
@@ -24,5 +24,5 @@ export const playAlertTrack = () => new Promise((res, rej) => {
 
 export const releaseSounds = () => {
   alert.release();
-}
+};
 

@@ -2,7 +2,7 @@ import {
   createStackNavigator,
   createDrawerNavigator,
   createSwitchNavigator,
-} from "react-navigation";
+} from 'react-navigation';
 
 import LoadingScreen from '../screens/AppLoading';
 // Setup screens
@@ -29,30 +29,35 @@ import JoinPodQRScan from '../screens/JoinPodQRScan';
 // import BecomeResponerNotification from '../screens/BecomeResponerNotification';
 
 
-// const MenuNavigator = createDrawerNavigator({
-//   Notifications: { screen: Notifications },
-//   Pods: { screen: Pods },
-//   PersonalDetails: { screen: PersonalDetails }
-// }, {
-//     drawerWidth: Dimensions.get("window").width,
-//     contentComponent: Menu
-//   })
+const MenuNavigator = createDrawerNavigator({
+  //   Notifications: { screen: Notifications },
+  //   Pods: { screen: Pods },
+  //   PersonalDetails: { screen: PersonalDetails }
+  DataProtection: { screen: DataProtection },
+  JoinPodQRScan: { screen: JoinPodQRScan },
+  TermsAndConditionsMain: { screen: TermsAndConditions },
+  AppLoading: { screen: LoadingScreen }
+},
+{
+  //     drawerWidth: Dimensions.get("window").width,
+  //     contentComponent: Menu
+});
 
 const MainAppNavigator = createStackNavigator({
-  // Menu: { screen: MenuNavigator },
+  Menu: { screen: MenuNavigator },
   JoinPodQRScan: { screen: JoinPodQRScan },
   TermsAndConditionsMain: { screen: TermsAndConditions }
-},{
+}, {
   headerMode: 'none'
-})
+});
 
 const SetupNavigator = createStackNavigator({
   DataProtection: { screen: DataProtection },
   // PersonalDetails: { screen: PersonalDetails },
   TermsAndConditions: { screen: TermsAndConditions }
-},{
+}, {
   headerMode: 'none'
-})
+});
 
 export default createSwitchNavigator(
   {

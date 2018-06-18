@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+// import { View, Text } from 'react-native';
 
-export default class LoadingScreen extends Component {
+export default class LoadingScreen extends React.Component {
 
   render() {
     return (

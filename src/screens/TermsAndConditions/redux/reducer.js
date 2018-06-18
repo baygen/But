@@ -1,4 +1,4 @@
-import { TermsAndConditions } from '../../../redux/constants';
+import { TermsAndConditions, App } from '../../../redux/constants';
 
 const termsAndConditiosState = {
   status: false,
@@ -8,7 +8,7 @@ const termsAndConditiosState = {
 
 export default (state = termsAndConditiosState, action) => {
   switch (action.type) {
-    case TermsAndConditions.APP_STARTED:
+    case App.STARTED:
       return {
         ...state,
         appIsLaunched: true

@@ -13,7 +13,7 @@ export const navigationReducer = createNavigationReducer(AppRoutes);
 // Note: createReactNavigationReduxMiddleware must be run before createNavigationPropConstructor
 export const navigationMiddleware = createReactNavigationReduxMiddleware(
   "app",
-  state => state.navigation,
+  state => state.navigation
 );
 
 const AppNavigator = reduxifyNavigator( AppRoutes, "app")

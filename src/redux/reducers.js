@@ -6,7 +6,7 @@ import dataProtection from '../screens/DataProtection/redux/reducer';
 import app from './AppData/reducer';
 
 export default combineReducers({
-	navigation: navigationReducer,
+  navigation: navigationReducer,
   termsAndCondition,
   dataProtection,
   app

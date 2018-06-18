@@ -3,7 +3,9 @@ const appWordStructure = {
   appName: 'app',
   name: 'Name',
   secondName: 'Second name',
-  age: 'Age'
+  age: 'Age',
+  accept: 'Accept',
+  decline: 'Decline'
 }
 
 const appWordStructureUA = {
@@ -11,7 +13,8 @@ const appWordStructureUA = {
   name: 'Імʼя',
   secondName: 'Прізвище',
   age: 'Вік',
-
+  accept: 'Прийняти',
+  decline: 'Відхилити'
 }
 
 const LANGUAGES_ISO = {
