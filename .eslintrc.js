@@ -5,11 +5,12 @@ module.exports = {
     'es6': true
   },
   'extends': ['eslint:recommended', 'plugin:react-native/all'],
+  'parser': 'babel-eslint',
   'parserOptions': {
     'ecmaVersion': 2017,
-    "ecmaFeatures": {
+    'ecmaFeatures': {
         'jsx': true,
-        "experimentalObjectRestSpread": true
+        'experimentalObjectRestSpread': true
     },
     'sourceType': 'module'
   },
@@ -22,6 +23,9 @@ module.exports = {
     'indent': [
       'error',
       2
+    ],
+    'no-undef': [
+        1
     ],
     'linebreak-style': [
       'error',
@@ -36,11 +40,10 @@ module.exports = {
       'always'
     ],
     'no-unused-vars':[
-        1
+        0
     ],
     'no-console': [
-        0,
-        // 'always'
+        0
     ]
   }
 };
