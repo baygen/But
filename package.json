@@ -6,9 +6,10 @@
     "watch": "npm-watch bundle",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": " ./node_modules/.bin/eslint --no-ignore ./src/**/*.js ",
-    "lint-fix": " ./node_modules/.bin/eslint --no-ignore ./src/**/*.js --fix",
+    "lint": " ./node_modules/.bin/eslint --no-ignore ./src/** ",
+    "lint-fix": " ./node_modules/.bin/eslint --no-ignore ./src/** --fix",
     "android": "react-native run-android",
+    "precommit": "npm run lint-fix",
     "bundle": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
