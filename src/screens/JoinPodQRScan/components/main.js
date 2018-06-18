@@ -12,8 +12,8 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class ScanScreen extends Component {
   onSuccess(e) {
-    console.log('QR result')
-    console.info(e)
+    console.log('QR result');
+    console.info(e);
     // Linking
     //   .openURL(e.data)
     //   .catch(err => console.error('An error occured', err));
@@ -43,7 +43,7 @@ export default class ScanScreen extends Component {
           //()=>{
             //LanguageManager.setCurrentLanguage("ua")
             //  }}
-            >
+          >
             <Text style={styles.buttonText}>OK. Got it!</Text>
           </TouchableOpacity>
         }

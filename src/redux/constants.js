@@ -1,6 +1,6 @@
 // import KeyMirror from 'keymirror';
 
-const genereteConstantsFor = (title, actions) => {
+const genereteConstantsFor = (title = '', actions) => {
   let temp = {};
   Object.keys(actions).forEach(key => {
     temp[key] = `${title}.${key}`;

@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {
   StyleSheet,
@@ -15,17 +15,17 @@ import { goTo } from './logic';
 @connect(state => ({
   pods: state
 }), {
-    goTo
-  })
+  goTo
+})
 export default class ScanScreen extends Component {
 
   componentDidMount() {
-    console.log(Object.keys(this.context))
+    console.log(Object.keys(this.context));
   }
 
   onSuccess = (e) => {
-    console.log('QR result')
-    console.info(this.props.goTo)
+    console.log('QR result');
+    console.info(this.props.goTo);
     this.props.goTo();
     // Linking
     //   .openURL(e.data)
@@ -35,7 +35,7 @@ export default class ScanScreen extends Component {
   solo = () => {
     LanguageManager.setCurrentLanguage('de');
     this.forceUpdate();
-    this.props.navigation.navigate('setup')
+    this.props.navigation.navigate('setup');
     // QRCodeScanner.
   }
 

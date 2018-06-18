@@ -12,8 +12,8 @@ export default class TermsAndConditions extends Component {
   }
 
   componentDidMount() {
-    console.log('TermsAndConditions did mount')
-    console.log(Object.keys(this))
+    console.log('TermsAndConditions did mount');
+    console.log(Object.keys(this));
   }
 
   render() {

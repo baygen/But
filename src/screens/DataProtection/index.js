@@ -12,8 +12,8 @@ export default class DataProtection extends Component {
   }
 
   componentDidMount() {
-    console.log('DataProtection did mount')
-    console.log(Object.keys(this))
+    console.log('DataProtection did mount');
+    console.log(Object.keys(this));
   }
 
   render() {

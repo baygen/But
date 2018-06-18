@@ -18,8 +18,9 @@ module.exports = {
     'react-native'
   ],
   'rules': {
-    'react-native/no-unused-styles': 2,
-    'react-native/no-color-literals': 2,
+    'react-native/no-unused-styles': 1,
+    'react-native/no-color-literals': 1,
+    'react-native/no-inline-styles': 1,
     'indent': [
       'error',
       2

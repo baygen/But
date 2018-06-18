@@ -11,23 +11,23 @@ export default class LoadingScreen extends Component {
 
   _checkAuth = () => {
     setTimeout(() => {
-      this.props.navigation.navigate('app')
-    }, 4000)
+      this.props.navigation.navigate('app');
+    }, 4000);
   }
 
   componentDidMount() {
-    console.log('LoadingScreen did mount')
+    console.log('LoadingScreen did mount');
     // console.keys(this)
   }
 
   accept = () => {
-    console.log('ACCEPTED')
-    this.props.navigation.navigate('app')
+    console.log('ACCEPTED');
+    this.props.navigation.navigate('app');
   }
 
   decline = () => {
-    console.log('DECLINED')
-    this.props.navigation.navigate('setup')
+    console.log('DECLINED');
+    this.props.navigation.navigate('setup');
   }
 
   render() {
