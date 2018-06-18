@@ -1,20 +1,26 @@
 
 const appWordStructure = {
   appName: 'app',
-  name: 'Name',
-  secondName: 'Second name',
-  age: 'Age',
-  accept: 'Accept',
-  decline: 'Decline'
+  Name: 'Name',
+  SecondName: 'Second name',
+  Age: 'Age',
+  Accept: 'Accept',
+  Decline: 'Decline',
+  Cancel: 'Cancel',
+  Template: 'Template',
+  Nationality: 'Nationality'
 };
 
 const appWordStructureUA = {
   appName: 'Назва програми',
-  name: 'Імʼя',
-  secondName: 'Прізвище',
-  age: 'Вік',
-  accept: 'Прийняти',
-  decline: 'Відхилити'
+  Name: 'Імʼя',
+  SecondName: 'Прізвище',
+  Age: 'Вік',
+  Accept: 'Прийняти',
+  Decline: 'Відхилити',
+  Cancel: 'Відмінити',
+  Template: 'Взірець',
+  Nationality: 'Національність'
 };
 
 const LANGUAGES_ISO = {
@@ -28,8 +34,8 @@ class WordManager {
     this.word = LANGUAGES_ISO[this.currentLanguage];
   }
 
-  setCurrentLanguage (ln) {
-    console.log('New language '+ln.slice(0,2).toLowerCase());
+  setCurrentLanguage(ln) {
+    console.log('New language ' + ln.slice(0, 2).toLowerCase());
     this.currentLanguage = this.currentLanguage === 'ua' ? 'en' : 'ua';
     this.word = LANGUAGES_ISO[this.currentLanguage];
   }

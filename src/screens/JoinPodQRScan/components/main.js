@@ -35,7 +35,7 @@ export default class ScanScreen extends Component {
           <Text style={styles.centerText}>
             {LanguageManager.word.appName} <Text style={styles.textBold}>
             wikipedia.org/wiki/QR_code</Text>
-            {LanguageManager.word.name}
+            {LanguageManager.word.Name}
           </Text>
         }
         bottomContent={

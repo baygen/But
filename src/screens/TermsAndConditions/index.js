@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 
-@connect(state=>({
+@connect(state => ({
   termsAndConditions: state.termsAndConditions
 }))
 export default class TermsAndConditions extends Component {
@@ -16,11 +16,17 @@ export default class TermsAndConditions extends Component {
     console.log(Object.keys(this));
   }
 
+  go = route => this.props.navigation.navigate(route);
+
+  goLoading = () => {
+    this.go('loading');
+  }
+
   render() {
     return (
       <View>
         <Text>TermsAndConditions page:</Text>
-        <Text style={{color: 'orange'}} >{JSON.stringify(this.props.termsAndConditions)}</Text>
+        <Text style={{ color: 'orange' }} onPress={this.goLoading} >{JSON.stringify(this.props.termsAndConditions)}</Text>
       </View>
     );
   }

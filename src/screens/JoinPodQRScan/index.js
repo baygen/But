@@ -35,7 +35,7 @@ export default class ScanScreen extends Component {
   solo = () => {
     LanguageManager.setCurrentLanguage('de');
     this.forceUpdate();
-    this.props.navigation.navigate('setup');
+    this.props.navigation.openDrawer();
     // QRCodeScanner.
   }
 
@@ -49,7 +49,7 @@ export default class ScanScreen extends Component {
           <TouchableOpacity style={styles.buttonTouchable} onPress={this.onSuccess}>
             <Text style={styles.centerText}>
               {LanguageManager.word.appName}
-              {LanguageManager.word.name}
+              {LanguageManager.word.Name}
             </Text>
             <Text style={styles.textBold}>
               {JSON.stringify(this.props.pods.dataProtection)}
@@ -57,11 +57,7 @@ export default class ScanScreen extends Component {
           </TouchableOpacity>
         }
         bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable} onPress={this.solo}
-          //()=>{
-          //LanguageManager.setCurrentLanguage("ua")
-          //  }}
-          >
+          <TouchableOpacity style={styles.buttonTouchable} onPress={this.solo} >
             <Text style={styles.buttonText}>OK. Got it!</Text>
           </TouchableOpacity>
         }

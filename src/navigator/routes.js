@@ -5,9 +5,11 @@ import {
 } from 'react-navigation';
 
 import LoadingScreen from '../screens/AppLoading';
+import LoadingScreen1 from '../screens/AppLoading.1';
+import LoadingScreen2 from '../screens/AppLoading.2';
 // Setup screens
 import DataProtection from '../screens/DataProtection';
-// import PersonalDetails from '../screens/PersonalDetails';
+import PersonalDetails from '../screens/Profile';
 import TermsAndConditions from '../screens/TermsAndConditions';
 
 // Main screens
@@ -15,7 +17,7 @@ import TermsAndConditions from '../screens/TermsAndConditions';
 // Menu screens
 // import Notifications from '../screens/Notifications';
 // import Pods from '../screens/Pods';
-// Peronal details screen has tobe in the Menu as well
+// Peronal details screen has to be in the Menu as well
 
 // // Other screens
 // import JoinPodCode from '../screens/JoinPodCode';
@@ -28,44 +30,66 @@ import JoinPodQRScan from '../screens/JoinPodQRScan';
 // import MessageNotification from '../screens/MessageNotification';
 // import BecomeResponerNotification from '../screens/BecomeResponerNotification';
 
+const ROUTES = {
+  JoinPodQRScan: 'JoinPodQRScan',
+  LoadingScreen1: 'LoadingScreen1',
+  LoadingScreen2: 'LoadingScreen2',
+  Menu: 'Menu',
+  Profile: 'Profile',
+  DataProtection: 'DataProtection',
+  TermsAndConditions: 'TermsAndConditions',
+  PersonalDetails: 'PersonalDetails',
+  AppLoadingPage: 'loading',
+  AppRoot: 'app',
+  SetupFlow: 'setup'
+};
 
 const MenuNavigator = createDrawerNavigator({
   //   Notifications: { screen: Notifications },
   //   Pods: { screen: Pods },
-  //   PersonalDetails: { screen: PersonalDetails }
-  DataProtection: { screen: DataProtection },
-  JoinPodQRScan: { screen: JoinPodQRScan },
-  TermsAndConditionsMain: { screen: TermsAndConditions },
-  AppLoading: { screen: LoadingScreen }
+  // DataProtection: { screen: DataProtection },
+  [ROUTES.JoinPodQRScan]: {
+    screen: JoinPodQRScan
+  },
+  [ROUTES.LoadingScreen1]: {
+    screen: LoadingScreen1
+  },
+  [ROUTES.LoadingScreen2]: {
+    screen: LoadingScreen2
+  },
+  // TermsAndConditionsMain: { screen: TermsAndConditions },
+  // AppLoading: { screen: LoadingScreen }
 },
 {
+  initialRouteName: 'JoinPodQRScan'
   //     drawerWidth: Dimensions.get("window").width,
   //     contentComponent: Menu
 });
 
 const MainAppNavigator = createStackNavigator({
-  Menu: { screen: MenuNavigator },
-  JoinPodQRScan: { screen: JoinPodQRScan },
-  TermsAndConditionsMain: { screen: TermsAndConditions }
+  [ROUTES.Menu]: { screen: MenuNavigator },
+  [ROUTES.Profile]: { screen: PersonalDetails }
 }, {
   headerMode: 'none'
 });
 
 const SetupNavigator = createStackNavigator({
-  DataProtection: { screen: DataProtection },
-  // PersonalDetails: { screen: PersonalDetails },
-  TermsAndConditions: { screen: TermsAndConditions }
+  [ROUTES.DataProtection]: { screen: DataProtection },
+  [ROUTES.TermsAndConditions]: { screen: TermsAndConditions },
+  [ROUTES.PersonalDetails]: { screen: PersonalDetails }
 }, {
   headerMode: 'none'
 });
 
 export default createSwitchNavigator(
   {
-    loading: LoadingScreen,
-    app: MainAppNavigator,
-    setup: SetupNavigator,
+    [ROUTES.AppLoadingPage]: LoadingScreen,
+    [ROUTES.AppRoot]: MainAppNavigator,
+    [ROUTES.SetupFlow]: SetupNavigator,
   },
   {
-    initialRouteName: 'loading'
+    initialRouteName: ROUTES.AppLoadingPage
   }
 );
+
+export const SCREENS = ROUTES;
