@@ -1,6 +1,6 @@
 import { AppRegistry, Platform } from 'react-native';
 // import App from './App';
-import Root from './src/Root'
+import Root from './src/Root';
 import BackTask from './BackTask';
 
 if (Platform.OS === 'android') {
