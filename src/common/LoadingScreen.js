@@ -1,11 +1,12 @@
 import React from 'react';
-// import { View, Text } from 'react-native';
+// import { StyleSheet } from 'react-native';
+import Styles from './Styles';
 
 export default class LoadingScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: 'gray' }}>
+      <View style={Styles.backgroundColorGray}>
         <Text>LoadingScreen page:</Text>
         {/* <Text style={{color: 'orange'}} >{JSON.stringify(this.props.dataProtection)}</Text> */}
       </View>
