@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { SCREENS } from '../../navigator/routes';
+import { AcceptDeclineButtons } from '../../common/TwoButtonsAtRow';
+import Styles from '../../common/Styles';
 
 
 @connect(state => ({
@@ -18,15 +21,25 @@ export default class TermsAndConditions extends Component {
 
   go = route => this.props.navigation.navigate(route);
 
-  goLoading = () => {
-    this.go('loading');
+  onDecline = () => {
+    this.go(SCREENS.DataProtection);
+  }
+
+  onAccept = () => {
+    this.go(SCREENS.PersonalDetails);
   }
 
   render() {
     return (
-      <View>
+      <View style={Styles.centeredContainerColumn}>
         <Text>TermsAndConditions page:</Text>
-        <Text style={{ color: 'orange' }} onPress={this.goLoading} >{JSON.stringify(this.props.termsAndConditions)}</Text>
+        <Text style={{ color: 'orange' }}>
+          {JSON.stringify(this.props.termsAndConditions)}
+        </Text>
+        <AcceptDeclineButtons
+          onDecline={this.onDecline}
+          onAccept={this.onAccept}
+        />
       </View>
     );
   }

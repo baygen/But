@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { SCREENS } from '../../navigator/routes';
+import Lang from '../../Languages';
 import Styles from '../../common/Styles';
-import TwoButtons from '../../common/TwoButtonsAtRow';
+import { AcceptDeclineButtons } from '../../common/TwoButtonsAtRow';
 
-@connect(state=>({
-  dataProtection: state.dataProtection
+@connect(state => ({
+  dataProtection: state.dataProtection,
+  store: state
 }))
 export default class DataProtection extends Component {
   state = {
@@ -14,31 +17,26 @@ export default class DataProtection extends Component {
 
   componentDidMount() {
     console.log('DataProtection did mount');
-    console.log(Object.keys(this));
+    console.log(Object.keys(this.context));
   }
 
-  go = route => {
-    this.props.navigation.navigate(route);
+  go = route => this.props.navigation.navigate(route);
+
+  onDecline = () => {
+    this.go(SCREENS.AppLoadingPage);
   }
 
-  decline = () => {
-    this.go('TermsAndConditions');
-  }
-
-  accept = () => {
-    this.go('Profile');
+  onAccept = () => {
+    this.go(SCREENS.TermsAndConditions);
   }
 
   render() {
     return (
       <View style={Styles.centeredContainerColumn} >
         <Text>DataProtection page:</Text>
-        <Text style={{color: 'orange'}} >{JSON.stringify(this.props.dataProtection)}</Text>
-        <TwoButtons
-          onLeft={this.decline}
-          onRight={this.accept}
-          leftTitle='Terms and condition'
-          rightTitle='Profile'
+        <AcceptDeclineButtons
+          onAccept={this.onAccept}
+          onDecline={this.onDecline}
         />
       </View>
     );

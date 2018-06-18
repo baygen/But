@@ -8,7 +8,8 @@ const appWordStructure = {
   Decline: 'Decline',
   Cancel: 'Cancel',
   Template: 'Template',
-  Nationality: 'Nationality'
+  Nationality: 'Nationality',
+  Profile: 'Profile'
 };
 
 const appWordStructureUA = {
@@ -20,7 +21,8 @@ const appWordStructureUA = {
   Decline: 'Відхилити',
   Cancel: 'Відмінити',
   Template: 'Взірець',
-  Nationality: 'Національність'
+  Nationality: 'Національність',
+  Profile: 'Профіль'
 };
 
 const LANGUAGES_ISO = {

@@ -11,18 +11,31 @@ export default RowWithTwoButtonsAtRow = (
     onLeft,
     onRight,
     leftTitle,
-    rightTitle
+    rightTitle,
+    style = {},
+    disableLeft,
+    disableRight
   }) => (
-  <View style={Styles.rowWidthContainer} >
-    <Button color='red' title={leftTitle || 'cancel'} onPress={onLeft} />
-    <Button color='green' title={rightTitle || 'ok'} onPress={onRight} />
+  <View style={[Styles.rowWidthContainer, style]} >
+    <Button disabled={disableLeft} color='red' title={leftTitle || 'cancel'} onPress={onLeft} />
+    <Button disabled={disableRight} color='green' title={rightTitle || 'ok'} onPress={onRight} />
   </View>
 );
 
 export const AcceptDeclineButtons = (
   {
     onAccept,
-    onDecline
+    onDecline,
+    disableAccept,
+    disableDecline,
+    style = {}
   }) => (
-  <RowWithTwoButtonsAtRow onRight={onAccept} onLeft={onDecline} leftTitle={Lang.word.Decline} rightTitle={Lang.word.Accept} />
+  <RowWithTwoButtonsAtRow
+    style={style}
+    onRight={onAccept}
+    onLeft={onDecline}
+    disableLeft={disableDecline}
+    disableRight={disableAccept}
+    leftTitle={Lang.word.Decline}
+    rightTitle={Lang.word.Accept} />
 );

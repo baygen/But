@@ -3,6 +3,7 @@ import {
   createDrawerNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
+import Language from '../Languages';
 
 import LoadingScreen from '../screens/AppLoading';
 import LoadingScreen1 from '../screens/AppLoading.1';
@@ -35,7 +36,7 @@ const ROUTES = {
   LoadingScreen1: 'LoadingScreen1',
   LoadingScreen2: 'LoadingScreen2',
   Menu: 'Menu',
-  Profile: 'Profile',
+  Profile: Language.word.Profile,
   DataProtection: 'DataProtection',
   TermsAndConditions: 'TermsAndConditions',
   PersonalDetails: 'PersonalDetails',
@@ -61,7 +62,7 @@ const MenuNavigator = createDrawerNavigator({
   // AppLoading: { screen: LoadingScreen }
 },
 {
-  initialRouteName: 'JoinPodQRScan'
+  initialRouteName: ROUTES.JoinPodQRScan
   //     drawerWidth: Dimensions.get("window").width,
   //     contentComponent: Menu
 });
@@ -70,7 +71,8 @@ const MainAppNavigator = createStackNavigator({
   [ROUTES.Menu]: { screen: MenuNavigator },
   [ROUTES.Profile]: { screen: PersonalDetails }
 }, {
-  headerMode: 'none'
+  headerMode: 'none',
+  initialRouteName: ROUTES.Menu
 });
 
 const SetupNavigator = createStackNavigator({
@@ -78,7 +80,8 @@ const SetupNavigator = createStackNavigator({
   [ROUTES.TermsAndConditions]: { screen: TermsAndConditions },
   [ROUTES.PersonalDetails]: { screen: PersonalDetails }
 }, {
-  headerMode: 'none'
+  headerMode: 'none',
+  initialRouteName: ROUTES.DataProtection
 });
 
 export default createSwitchNavigator(

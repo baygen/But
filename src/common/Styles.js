@@ -26,5 +26,10 @@ export default StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: '5%',
     paddingRight: '5%'
+  },
+  input: {
+    width: 0.9 * width,
+    lineHeight: 16,
+    fontSize: 14
   }
 });

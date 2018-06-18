@@ -7,20 +7,21 @@ import { navigationMiddleware } from '../navigator';
 
 const crashReporter = store => next => action => {
   try {
-    console.log(Object.keys(store));
+
+    if (action.type == 'Navigation/NAVIGATE') {
+      console.log(`Navigate to ${action.routeName}`);
+    }
     return next(action);
   } catch (err) {
-    // console.error('Caught an exception! for ', action.type,'\n');
     return next(action);
-    // throw err
   }
 };
 
 const middlewares = [
-  crashReporter,
   navigationMiddleware,
   promiseMiddleware(),
-  thunk
+  thunk,
+  crashReporter
 ];
 
 // if (__DEV__) { // eslint-disable-line
